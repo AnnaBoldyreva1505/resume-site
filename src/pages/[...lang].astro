@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LanguageDropdown from '../components/LanguageDropdown.astro';
+import en from '../i18n/en.js';
+import ru from '../i18n/ru.js';
+import kz from '../i18n/kz.js';
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'ru' } },
+    { params: { lang: 'kz' } },
+  ];
+}
+
+const langs = { en, ru, kz };
+const { lang = 'en' } = Astro.params;
+const t = langs[lang] || langs['en'];
+---
+
+<BaseLayout title="Anna Boldyreva" lang={lang}>
+
+  <main class="p-8 text-center">
+    <h1 class="text-3xl font-bold mb-4">{t.greeting}</h1>
+    <button class="px-4 py-2 bg-pink-600 text-white rounded">{t.buttonText}</button>
+  </main>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import LanguageDropdown from '../components/LanguageDropdown.astro';
+import '../styles/styles.css'; // ✅ Astro-style импорт
+const { title = 'Anna Boldyreva', description = '', lang = 'en' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="p-4">
+    <!-- 🔽 Вставляем компонент флажков -->
+    <LanguageDropdown current={lang} />
+
+    <!-- Вставка основного контента страницы -->
+    <slot />
+  </body>
+</html>
