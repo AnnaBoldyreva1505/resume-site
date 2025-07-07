@@ -1,0 +1,58 @@
+---
+// Hero.astro
+const { t = {}, name = 'Anna Boldyreva' } = Astro.props;
+---
+<section
+  id="home"
+  class="relative w-full h-screen bg-cover bg-center flex items-center justify-center text-center lg:pl-[260px]"
+  style="background-image: url('/img/banner.jpg');"
+>
+  <div class="relative z-10 text-black max-w-[90%]">
+    <h2 class="text-base sm:text-lg md:text-2xl font-medium mb-2 tracking-wider">
+      {t.hero?.hello || "HELLO! I'M"}
+    </h2>
+
+    <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-2 leading-tight uppercase">
+      {t.name || name}
+    </h1>
+
+    <h3 class="text-sm sm:text-base md:text-2xl font-semibold mb-6 min-h-[30px]">
+      <span
+        id="typed-text"
+        class="text-pink-600"
+        data-strings={JSON.stringify(
+          t.hero?.typed || [
+            'Web Developer',
+            'UI/UX Designer',
+            'Creative Professional',
+          ]
+        )}
+      ></span>
+    </h3>
+
+    <a
+      href="/cv.pdf"
+      download
+      class="inline-block px-5 py-2 sm:px-6 sm:py-3 bg-white text-black border border-black rounded-md font-semibold hover:bg-pink-600 hover:text-white transition duration-300 text-sm sm:text-base"
+    >
+      {t.hero?.download || 'Download My CV'} ↓
+    </a>
+  </div>
+
+  <script type="module" is:inline>
+    import('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/+esm').then((module) => {
+      const Typed = module.default;
+      const element = document.querySelector('#typed-text');
+      const typedStrings = JSON.parse(element.dataset.strings);
+
+      new Typed('#typed-text', {
+        strings: typedStrings,
+        typeSpeed: 60,
+        backSpeed: 40,
+        loop: true,
+        backDelay: 2000,
+        startDelay: 500,
+      });
+    });
+  </script>
+</section>

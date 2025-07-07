@@ -1,0 +1,52 @@
+---
+const { t = {}, name = "Anna Boldyreva" } = Astro.props;
+---
+
+<section id="about" class="bg-white text-black py-16 lg:pl-[250px] px-4 sm:px-6">
+  <!-- Заголовок с пунктирной линией -->
+  <div class="text-center mb-12 relative">
+    <hr class="border-t border-dashed border-pink-400 mb-2" />
+    <h2 class="inline-block text-2xl md:text-3xl font-bold text-pink-600 bg-white px-4 relative z-10 -mt-6">
+      {t.about?.sectionTitle || "About Me"}
+    </h2>
+  </div>
+
+  <!-- Контент -->
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+    <!-- Фото -->
+    <div class="flex justify-center">
+      <img
+        src="/img/photo.jpg"
+        alt={name}
+        class="rounded-xl border-4 border-pink-400 w-[280px] h-[280px] object-cover shadow-lg"
+      />
+    </div>
+
+    <!-- Инфо + описание -->
+    <div class="md:col-span-2 space-y-6">
+      <div class="grid sm:grid-cols-2 gap-6 text-sm md:text-base">
+        <div class="space-y-2">
+          <p><strong>{t.about?.labelName || "Name"}:</strong> {name}</p>
+          <p><strong>{t.about?.labelPhone || "Phone"}:</strong> +7 707 211 7120</p>
+          <p><strong>{t.about?.labelLocation || "Location"}:</strong> Kazakhstan</p>
+          <p class="pt-2"><strong>Social:</strong></p>
+          <div class="flex gap-3">
+            <a href="#" class="text-gray-600 hover:text-pink-600"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a href="#" class="text-gray-600 hover:text-pink-600"><i class="fab fa-github fa-lg"></i></a>
+            <a href="#" class="text-gray-600 hover:text-pink-600"><i class="fab fa-behance fa-lg"></i></a>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <p><strong>{t.about?.labelEmail || "Email"}:</strong> hannabl1988@gmail.com</p>
+          <p><strong>{t.about?.labelBirthday || "Birthday"}:</strong> 15 May 1988</p>
+          <p><strong>{t.about?.labelNationality || "Nationality"}:</strong> Kazakh</p>
+        </div>
+      </div>
+
+      <!-- Описание под пунктами -->
+      <div class="text-gray-700 leading-relaxed text-sm md:text-base pt-2">
+        <p>{t.about?.description}</p>
+      </div>
+    </div>
+  </div>
+</section>
