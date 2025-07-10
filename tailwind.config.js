@@ -15,6 +15,10 @@ module.exports = {
     "duration-300",
     "ease-in-out",
     "origin-top-right",
+    "max-h-0",
+    "max-h-[400px]",
+    "hidden",
+    "block",
   ],
   theme: {
     extend: {

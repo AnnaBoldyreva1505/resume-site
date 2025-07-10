@@ -2,23 +2,57 @@
 const { t = {} } = Astro.props;
 ---
 
-<section id="experience" class="py-16 bg-gray-50 text-black lg:pl-[250px] px-4 sm:px-6">
+<section id="experience" class="bg-white text-black py-16 px-4 sm:px-6 scroll-mt-[64px]">
+
+
   <!-- Заголовок -->
   <div class="text-center mb-12 relative">
     <hr class="border-t border-dashed border-pink-400 mb-2" />
-    <h2 class="inline-block text-2xl md:text-3xl font-bold text-pink-600 bg-gray-50 px-4 relative z-10 -mt-6">
-      {t.experience?.sectionTitle || "Work Experience"}
+    <h2 class="inline-block text-2xl md:text-3xl font-bold text-pink-600 bg-white px-4 relative z-10 -mt-6">
+      {t.experience?.sectionTitle || "Work & Education"}
     </h2>
   </div>
 
-  <!-- Карточки -->
-  <div class="max-w-5xl mx-auto space-y-8">
-    {(t.experience?.jobs || []).map((job) => (
-      <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-pink-500 hover:shadow-lg transition">
-        <h3 class="text-xl font-bold text-pink-600">{job.title}</h3>
-        <p class="text-sm text-gray-500 mb-2">{job.company} — {job.period}</p>
-        <p class="text-gray-700">{job.description}</p>
-      </div>
-    ))}
+  <!-- Сетка 2 колонки -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Блок работы -->
+    <div class="flex flex-col space-y-6">
+      {t.experience?.jobs.map(job => (
+        <div class="bg-white rounded-xl shadow-md p-6 h-full flex flex-col justify-between border border-gray-100">
+          <div class="flex items-center gap-3 mb-3">
+            {job.icon && <img src={job.icon} alt={job.company} class="h-6 w-auto" />}
+            <h3 class="text-lg font-semibold text-pink-600">{job.title}</h3>
+          </div>
+          <p class="text-sm text-gray-600 font-medium mb-1">{job.company}</p>
+          <p class="text-sm text-gray-500 mb-2 italic">{job.period}</p>
+          <p class="text-sm text-gray-700 whitespace-pre-line">{job.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Блок образования -->
+    <div class="flex flex-col space-y-6">
+      {t.experience?.education.map(item => (
+        <div class="bg-white rounded-xl shadow-md p-6 h-full flex flex-col justify-between border border-gray-100">
+          <h3 class="text-lg font-semibold text-pink-600">{item.degree}</h3>
+          <p class="text-sm text-gray-600 font-medium mb-1">{item.institution}</p>
+          <p class="text-sm text-gray-500 italic">{item.period}</p>
+          {item.location && (
+            <p class="text-sm text-gray-500 mt-1">{item.location}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Кнопка скачать резюме -->
+  <div class="text-center mt-12">
+    <a
+      href="/files/Anna_Boldyreva_CV.pdf"
+      download
+      class="inline-block bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-6 rounded-full transition-all shadow-md"
+    >
+      {t.experience?.downloadCV || "Download Resume"}
+    </a>
   </div>
 </section>

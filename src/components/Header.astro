@@ -1,25 +1,49 @@
 ---
-// src/components/Header.astro
 const { current = 'en' } = Astro.props;
 import LanguageDropdown from './LanguageDropdown.astro';
 ---
 
-<header class="lg:hidden fixed top-0 left-0 w-full z-50 bg-[#231720] text-white shadow-md">
-  <div class="flex items-center justify-between py-3">
-    <a href="#home" class="text-lg font-bold uppercase tracking-wide">Anna</a>
-    
+<header
+  x-data="{ open: false }"
+  class="lg:hidden fixed top-0 left-0 w-full bg-[#231720] text-white z-50 shadow-md"
+>
+  <div class="flex justify-between items-center px-4 py-3">
+    <a href="#home" class="font-bold uppercase text-lg">Anna</a>
+
     <div class="flex items-center space-x-4">
       <LanguageDropdown current={current} />
-      
+
       <button
-        onclick="
-          document.getElementById('mobile-menu').classList.toggle('hidden');
-        "
-        class="focus:outline-none"
+        @click="open = !open"
+        type="button"
+        class="p-2"
+        aria-label="Toggle menu"
       >
-        <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24">
+        <!-- Бургер -->
+        <svg
+          x-show="!open"
+          class="w-6 h-6 text-pink-400"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
           <path
             d="M4 6h16M4 12h16M4 18h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <!-- Крестик -->
+        <svg
+          x-show="open"
+          x-cloak
+          class="w-6 h-6 text-pink-400"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
@@ -30,7 +54,14 @@ import LanguageDropdown from './LanguageDropdown.astro';
     </div>
   </div>
 
-  <nav id="mobile-menu" class="hidden pb-4 space-y-2 text-sm uppercase">
+  <!-- Мобильное меню -->
+  <nav
+    x-show="open"
+    x-transition
+    class="px-4 pb-4 space-y-2 text-sm uppercase bg-[#231720] border-t border-pink-400"
+  >
+
+
     {[
       { href: '#home', label: 'Home' },
       { href: '#about', label: 'About' },
@@ -39,9 +70,13 @@ import LanguageDropdown from './LanguageDropdown.astro';
       { href: '#projects', label: 'Projects' },
       { href: '#education', label: 'Education' },
       { href: '#languages', label: 'Languages' }
-    ].map((item) => (
-      <a href={item.href} class="block py-1 text-white hover:text-pink-400 transition-colors duration-200">
-        {item.label}
+    ].map(({ href, label }) => (
+      <a
+        href={href}
+        class="block py-2 border-b border-gray-700 text-white hover:text-pink-400"
+        @click="open = false"
+      >
+        {label}
       </a>
     ))}
   </nav>

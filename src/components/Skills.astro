@@ -1,0 +1,75 @@
+---
+// Skills.astro
+---
+<section id="skills" class="py-16 bg-white text-black">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-10 text-center uppercase tracking-widest">
+        My Skills
+      </h2>
+  
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {[
+          { label: 'HTML / CSS', value: 95, id: 'html' },
+          { label: 'JavaScript', value: 85, id: 'js' },
+          { label: 'TailwindCSS', value: 90, id: 'tailwind' },
+          { label: 'React', value: 80, id: 'react' },
+          { label: 'Astro', value: 75, id: 'astro' },
+          { label: 'Storyline / iSpring', value: 92, id: 'storyline' },
+        ].map(({ label, value, id }) => (
+          <div>
+            <div class="flex justify-between mb-1">
+              <span class="font-medium">{label}</span>
+              <span id={`value-${id}`} class="font-mono text-sm text-pink-600">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
+              <div
+                class="progress-bar bg-gradient-to-r from-pink-500 to-pink-300 h-3 rounded-full transition-all duration-[2000ms]"
+                data-value={value}
+                data-target={`value-${id}`}
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <script client:load>
+    document.addEventListener('DOMContentLoaded', () => {
+      const progressBars = document.querySelectorAll('.progress-bar');
+  
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const bar = entry.target;
+              const value = parseInt(bar.dataset.value);
+              const targetId = bar.dataset.target;
+              const label = document.getElementById(targetId);
+  
+              let current = 0;
+              const step = Math.ceil(value / 40);
+  
+              const interval = setInterval(() => {
+                if (current >= value) {
+                  clearInterval(interval);
+                  label.textContent = value + '%';
+                  return;
+                }
+                current += step;
+                bar.style.width = current + '%';
+                if (label) label.textContent = `${Math.min(current, value)}%`;
+              }, 40);
+  
+              obs.unobserve(bar);
+            }
+          });
+        },
+        { threshold: 0.4 }
+      );
+  
+      progressBars.forEach((bar) => observer.observe(bar));
+    });
+  </script>
+  

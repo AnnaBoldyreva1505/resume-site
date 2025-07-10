@@ -1,37 +1,35 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-import Header from '../components/Header.astro';
-import SideMenu from '../components/SideMenu.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Experience from '../components/Experience.astro';
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Experience from "../components/Experience.astro";
+import Skills from "../components/Skills.astro";
 
-import en from '../i18n/en.js';
-import ru from '../i18n/ru.js';
-import kz from '../i18n/kz.js';
+import en from "../i18n/en.js";
+import ru from "../i18n/ru.js";
+import kz from "../i18n/kz.js";
 
 // Список маршрутов
 export async function getStaticPaths() {
   return [
-    { params: { lang: 'en' } },
-    { params: { lang: 'ru' } },
-    { params: { lang: 'kz' } },
+    { params: { lang: "en" } },
+    { params: { lang: "ru" } },
+    { params: { lang: "kz" } },
   ];
 }
 
 // Получаем язык и словарь
 const langs = { en, ru, kz };
 const { lang } = Astro.params;
-const t = langs[lang] || langs['en'];
+const t = langs[lang] || langs["en"];
 ---
 
 <BaseLayout title="Anna Boldyreva" lang={lang}>
-  <SideMenu current={lang} t={t} />  <!-- ✅ добавили t -->
-  
-  <Header /> <!-- Хедер для мобильной версии -->
- <Hero t={t} name={t.name} />
-<About t={t} />
-<Experience t={t} />
-
+  <Header />
+  <Hero t={t} name={t.name} />
+  <About t={t} />
+  <Experience t={t} />
+  <Skills t={t} />
 </BaseLayout>

@@ -31,31 +31,53 @@ export default {
     labelBirthday: "Birthday",
     labelNationality: "Nationality",
     description:
-      "I have over 10 years of experience in adult education and corporate training. Since 2017, I've been developing e-learning courses, tests, interactive materials, and learning programs. I’m also a web developer, which allows me to create custom course designs and templates. I use Figma for visual layouts and UX prototypes, and I develop full-scale digital learning solutions tailored to client needs.",
-  }, // ← ВАЖНО: вот здесь не хватало запятой!
+      "I have over 10 years of experience in adult education and corporate training. Since 2017, I've been developing e-learning courses, tests, interactive materials, and learning programs. I'm also a web developer, which allows me to create custom course designs and templates. I use Figma for visual layouts and UX prototypes, and I develop full-scale digital learning solutions tailored to client needs.",
+  },
   experience: {
-    sectionTitle: "Work Experience",
+    sectionTitle: "Work & Education",
+    downloadCV: "Download Resume",
     jobs: [
       {
-        title: "E-learning Developer",
-        company: "Telecom Company",
-        period: "2017 — Present",
-        description:
-          "Creating interactive online courses, simulations, and instructional solutions for corporate learning.",
+        title: "Senior E-learning Developer",
+        company: "Tele2 Kazakhstan",
+        period: "Feb 2021 – Present",
+        icon: "/img/logos/tele2-logo.png",
+        description: `Develop e-learning courses and training programs, manage distance learning initiatives.`,
       },
       {
-        title: "Frontend Developer",
-        company: "Freelance",
-        period: "2020 — Present",
-        description:
-          "Developing responsive websites and learning platforms with HTML, CSS, JS, and Astro.",
+        title: "E-learning Specialist",
+        company: "Tele2 Kazakhstan",
+        period: "Aug 2019 – Feb 2021",
+        icon: "/img/logos/tele2-logo.png",
+        description: `Created interactive courses using iSpring and Storyline platforms, managed LMS administration.`,
       },
       {
-        title: "Instructional Designer",
-        company: "L&D Agency",
-        period: "2015 — 2017",
-        description:
-          "Designed blended learning programs and custom training solutions using Figma, Storyline, iSpring.",
+        title: "Mentoring Supervisor",
+        company: "Tele2 Kazakhstan",
+        period: "Sep 2014 – Aug 2019",
+        icon: "/img/logos/tele2-logo.png",
+        description: `Led recruitment and training initiatives, designed training sessions and assessments.`,
+      },
+    ],
+    education: [
+      {
+        degree:
+          "Bachelor's in Radio Engineering, Electronics and Telecommunications",
+        institution: "Kazakh-American University",
+        period: "2008 – 2011",
+      },
+      {
+        degree:
+          "Master's in Radio Engineering, Electronics and Telecommunications",
+        institution:
+          "Siberian State University of Telecommunications and Information Sciences",
+        period: "2012 – 2014",
+      },
+      {
+        degree: "Student Full Stack Developer",
+        institution: "GoIT – Start your career in IT",
+        period: "Apr 2022 – Sep 2023",
+        location: "Kyiv City, Ukraine",
       },
     ],
   },

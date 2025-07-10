@@ -1,6 +1,9 @@
 ---
 import LanguageDropdown from '../components/LanguageDropdown.astro';
-import '../styles/styles.css'; // ✅ Astro-style импорт
+import SideMenu from '../components/SideMenu.astro';
+import Header from '../components/Header.astro'; // твой компонент для планшета/мобилки
+import '../styles/styles.css';
+
 const { title = 'Anna Boldyreva', description = '', lang = 'en' } = Astro.props;
 ---
 
@@ -11,12 +14,31 @@ const { title = 'Anna Boldyreva', description = '', lang = 'en' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <script src="https://unpkg.com/alpinejs" defer></script>
   </head>
-  <body>
-    <!-- 🔽 Вставляем компонент флажков -->
-    <LanguageDropdown current={lang} />
 
-    <!-- Вставка основного контента страницы -->
-    <slot />
+  <body class="bg-gray-50 text-black">
+
+    <!-- 🔽 Хедер только для планшета и мобилки -->
+    <header class="block lg:hidden w-full z-40 bg-white shadow-sm fixed top-0 left-0">
+      <Header />
+    </header>
+
+    <!-- 🔽 Сайдбар только для десктопа -->
+    <aside class="hidden lg:block fixed top-0 left-0 h-full w-[250px] bg-white shadow-md z-30">
+      <SideMenu />
+    </aside>
+
+    <!-- 🔽 Язык (плавающий элемент) -->
+    <div class="fixed top-4 right-4 z-50">
+      <LanguageDropdown current={lang} />
+    </div>
+
+    <!-- 🔽 Контент -->
+    <main
+      class="w-full pt-[64px] lg:pt-0 lg:pl-[250px] transition-all"
+    >
+      <slot />
+    </main>
   </body>
 </html>
